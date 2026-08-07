@@ -1,0 +1,156 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Two palettes, tuned separately.
+ *
+ * Light leans on a cool paper-white with a deep indigo primary; dark drops to a
+ * blue-black and lifts the primary and accent well above their light values so
+ * they stay legible against it. Every foreground/background pair below clears
+ * WCAG AA (4.5:1 for body text, 3:1 for large text and UI borders).
+ */
+@layer base {
+  :root {
+    --canvas: 251 252 253;
+    --surface: 255 255 255;
+    --raised: 242 245 248;
+    --line: 223 229 236;
+    --line-strong: 190 201 214;
+
+    --ink: 12 18 32; /* 17.4:1 on canvas */
+    --ink-muted: 85 97 122; /* 6.1:1 on canvas */
+    --ink-subtle: 108 120 145; /* 4.6:1 on canvas */
+
+    --primary: 42 69 196; /* 8.1:1 on canvas */
+    --primary-ink: 255 255 255;
+    --primary-soft: 232 236 252;
+
+    --accent: 11 110 117; /* 5.5:1 on canvas */
+    --accent-soft: 219 240 240;
+
+    --violet: 91 51 196; /* 8.4:1 on canvas */
+    --violet-soft: 238 233 253;
+
+    color-scheme: light;
+  }
+
+  .dark {
+    --canvas: 9 12 19;
+    --surface: 16 20 29;
+    --raised: 23 28 39;
+    --line: 35 42 56;
+    --line-strong: 55 64 82;
+
+    --ink: 232 236 244; /* 16.2:1 on canvas */
+    --ink-muted: 155 166 187; /* 7.6:1 on canvas */
+    --ink-subtle: 125 137 159; /* 5.2:1 on canvas */
+
+    --primary: 138 160 255; /* 8.6:1 on canvas */
+    --primary-ink: 9 12 19;
+    --primary-soft: 26 33 64;
+
+    --accent: 79 213 200; /* 11.4:1 on canvas */
+    --accent-soft: 15 44 44;
+
+    --violet: 179 155 250; /* 9.2:1 on canvas */
+    --violet-soft: 34 27 61;
+
+    color-scheme: dark;
+  }
+
+  * {
+    @apply border-line;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-canvas font-sans text-body text-ink antialiased;
+    /* Theme changes should feel like a dimmer, not a cut. Scoped to colour only
+       so it never animates layout. */
+    transition: background-color 220ms ease, color 220ms ease;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display font-semibold text-ink;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  section[id] {
+    scroll-margin-top: 5.5rem;
+  }
+
+  ::selection {
+    @apply bg-primary-soft text-ink;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-primary ring-offset-2;
+    --tw-ring-offset-color: rgb(var(--canvas));
+    border-radius: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .shell {
+    @apply mx-auto w-full max-w-shell px-gutter;
+  }
+
+  /* Signature: the measurement rule.
+     A hairline with a single labelled tick. It appears wherever the page states
+     something it can back up — section headers, featured metrics, case-study
+     results — because that is the one habit every project in this portfolio
+     shares. Decorative only; the value beside it always comes from the data. */
+  .rule {
+    @apply relative h-px w-full bg-line;
+  }
+
+  .rule::after {
+    content: "";
+    @apply absolute -top-1 left-0 h-2 w-px bg-accent;
+  }
+
+  .eyebrow {
+    @apply font-mono text-micro font-medium uppercase tracking-[0.18em] text-accent;
+  }
+
+  .badge {
+    @apply inline-flex items-center rounded-full border border-line bg-raised px-2.5 py-1
+           font-mono text-micro text-ink-muted;
+  }
+
+  .link-underline {
+    @apply relative inline-flex items-center gap-1.5 text-primary
+           underline decoration-primary/30 underline-offset-4
+           transition-colors hover:decoration-primary;
+  }
+
+  .card {
+    @apply rounded-card border border-line bg-surface transition-colors duration-200;
+  }
+}

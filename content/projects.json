@@ -1,0 +1,329 @@
+[
+  {
+    "slug": "loan-terms-assistant",
+    "title": {
+      "en": "Loan Terms Assistant",
+      "uz": "Kredit Shartlari Yordamchisi"
+    },
+    "description": {
+      "en": "A deliberately narrow RAG agent that answers questions about one real bank loan contract and cites the page it came from. Anything outside that scope — advice, other banks, prompt injections — is refused before retrieval even runs.",
+      "uz": "Faqat bitta real bank kredit shartnomasi bo'yicha savollarga javob beradigan va har bir javobga sahifa raqamini ilova qiladigan ataylab tor ixtisoslashgan RAG agenti. Doiradan tashqaridagi hamma narsa — maslahat, boshqa banklar, prompt-inyeksiyalar — qidiruv boshlanishidan oldin rad etiladi."
+    },
+    "category": "LLM & RAG",
+    "techStack": ["Next.js", "TypeScript", "Tailwind CSS", "FastAPI", "Python", "OpenAI", "Gemini", "Qdrant", "Render"],
+    "image": "/projects/loan-terms-assistant.png",
+    "githubUrl": "https://github.com/Davron030901/Loan-Terms-Assistant",
+    "liveUrl": "https://loan-terms-assistant.vercel.app",
+    "featured": true,
+    "caseStudy": {
+      "problem": {
+        "en": "General-purpose assistants answer loan questions fluently and wrongly. For a document that decides what someone owes, a plausible answer is worse than no answer — and the reader has no way to tell the two apart.",
+        "uz": "Umumiy maqsadli yordamchilar kredit savollariga ravon, lekin noto'g'ri javob beradi. Insonning qancha qarzi borligini belgilaydigan hujjat uchun ishonarli ko'rinadigan javob — javob yo'qligidan ham yomonroq, chunki o'quvchi ikkisini farqlay olmaydi."
+      },
+      "solution": {
+        "en": "Give the agent exactly one job: read one bank's Terms & Conditions and quote them. A scope guard rejects advice, other banks, jokes and prompt injections before retrieval runs. Every answer must carry a page number; when the contract is silent, the answer is 'Not stated in the terms.'",
+        "uz": "Agentga aniq bitta vazifa berildi: bitta bankning shartnoma matnini o'qish va undan iqtibos keltirish. Doira nazoratchisi (scope guard) maslahat so'rovlarini, boshqa banklar haqidagi savollarni, hazil va prompt-inyeksiyalarni qidiruvgacha to'xtatadi. Har bir javobda sahifa raqami bo'lishi shart; shartnomada yozilmagan bo'lsa, javob — 'Shartlarda ko'rsatilmagan'."
+      },
+      "architecture": {
+        "en": "Next.js on Vercel holds no secrets and talks to a FastAPI service on Render through a single origin. A request passes the scope guard, then filtered retrieval from Qdrant Cloud restricted to one document ID with a relevance floor, then generation constrained to the retrieved context, then a citation check that blocks any answer citing a page it never saw. OpenAI is primary, Gemini is the failover.",
+        "uz": "Vercel'dagi Next.js hech qanday maxfiy kalit saqlamaydi va Render'dagi FastAPI xizmatiga bitta origin orqali murojaat qiladi. So'rov avval doira nazoratchisidan o'tadi, keyin Qdrant Cloud'dan bitta hujjat ID'siga cheklangan va munosiblik chegarasi qo'yilgan qidiruv, so'ng faqat topilgan kontekst asosida javob generatsiyasi, va nihoyat iqtibos tekshiruvi — model ko'rmagan sahifaga havola qilsa, javob bloklanadi. Asosiy model OpenAI, zaxira sifatida Gemini."
+      },
+      "results": {
+        "en": "Out-of-scope requests are refused at the door instead of answered badly, and no answer can reach the user citing a page the retriever never returned. Both guarantees are enforced by checks in the pipeline, not by wording in a prompt.",
+        "uz": "Doiradan tashqari so'rovlar yomon javob olish o'rniga eshikdayoq rad etiladi va qidiruv qaytarmagan sahifaga havola qilgan javob foydalanuvchiga umuman yetib bormaydi. Ikkala kafolat ham promptdagi so'zlar bilan emas, pipeline ichidagi tekshiruvlar bilan ta'minlangan."
+      }
+    }
+  },
+  {
+    "slug": "multi-agent-ai-analyst",
+    "title": {
+      "en": "Multi-Agent AI Analyst",
+      "uz": "Ko'p Agentli AI Analitik"
+    },
+    "description": {
+      "en": "A supervisor agent plans and delegates to four specialists — documents, web, text-to-SQL and sandboxed code — while a critic verifies the answer before it reaches the user. Evaluated with RAGAS and traced end to end.",
+      "uz": "Supervayzer agent rejalashtiradi va to'rtta mutaxassisga — hujjatlar, veb, text-to-SQL va izolyatsiyalangan kod — vazifa taqsimlaydi; javob foydalanuvchiga yetib borishidan oldin kritik agent uni tekshiradi. RAGAS bilan baholanadi va boshidan oxirigacha kuzatiladi."
+    },
+    "category": "LLM & RAG",
+    "techStack": ["LangGraph", "Python", "Qdrant", "Gemini", "Tavily", "Langfuse", "RAGAS", "FastAPI", "Next.js", "TypeScript"],
+    "image": "/projects/multi-agent-ai-analyst.png",
+    "githubUrl": "https://github.com/Davron030901/Multi-Agent-AI-Analyst-Guide-1",
+    "liveUrl": "https://multi-agent-ai-analyst-guide-1.vercel.app",
+    "featured": true,
+    "caseStudy": {
+      "problem": {
+        "en": "\"How many customers churned last quarter, and why?\" cannot be answered by a single RAG agent. The number lives in a database, the reasons live in documents, and the comparison needs a calculation. One retriever answers a third of the question and sounds confident about the rest.",
+        "uz": "\"O'tgan chorakda nechta mijoz ketdi va nima uchun?\" — bunga bitta RAG agent javob bera olmaydi. Raqam ma'lumotlar bazasida, sabablari hujjatlarda, taqqoslash esa hisob-kitobni talab qiladi. Bitta retriever savolning uchdan bir qismiga javob beradi va qolganiga ishonch bilan taxmin qiladi."
+      },
+      "solution": {
+        "en": "A supervisor plans and routes to four specialists — RAG over documents, web search, text-to-SQL and sandboxed Python — gathering evidence across turns. A critic then checks the drafted answer for grounding, correctness and completeness, and sends it back for revision if any check fails.",
+        "uz": "Supervayzer rejalashtiradi va to'rtta mutaxassisga yo'naltiradi — hujjatlar bo'yicha RAG, veb-qidiruv, text-to-SQL va izolyatsiyalangan Python — bir necha qadamda dalil to'playdi. So'ngra kritik agent tayyorlangan javobni manbaga asoslanganlik, to'g'rilik va to'liqlik bo'yicha tekshiradi; biror tekshiruv o'tmasa, javobni qayta ishlashga qaytaradi."
+      },
+      "architecture": {
+        "en": "A LangGraph state machine with conditional edges. Qdrant holds document vectors plus a second collection used as long-term Q/A memory; Tavily covers the web; SQL passes SELECT-only validation; code runs behind an AST allow-list, an isolated process and rlimits. FastAPI streams over SSE to a Next.js chat UI on Vercel, traced in Langfuse and scored with RAGAS plus an LLM judge.",
+        "uz": "Shartli o'tishlarga ega LangGraph holat mashinasi. Qdrant hujjat vektorlarini va uzoq muddatli savol-javob xotirasi uchun ikkinchi kolleksiyani saqlaydi; veb uchun Tavily; SQL faqat SELECT validatsiyasidan o'tadi; kod esa AST ruxsat ro'yxati, alohida jarayon va rlimit cheklovlari ortida bajariladi. FastAPI SSE orqali oqim uzatadi, Vercel'dagi Next.js chat interfeysi uni ko'rsatadi; Langfuse'da kuzatiladi, RAGAS va LLM-hakam bilan baholanadi."
+      },
+      "results": {
+        "en": "The loop is bounded three independent ways — a graph recursion limit, a supervisor step budget, and a revision cap — so it cannot run forever. Faithfulness, response relevancy, context precision and context recall are measured rather than claimed, and the whole system runs on free tiers with no card.",
+        "uz": "Tsikl uchta mustaqil usulda cheklangan — grafning rekursiya limiti, supervayzerdagi qadam byudjeti va qayta ishlash chegarasi — shuning uchun u cheksiz davom eta olmaydi. Manbaga sodiqlik, javob munosibligi, kontekst aniqligi va kontekst qamrovi da'vo qilinmaydi, o'lchanadi; butun tizim karta talab qilmaydigan bepul tariflarda ishlaydi."
+      }
+    }
+  },
+  {
+    "slug": "kidbook-ai",
+    "title": {
+      "en": "KidBookAI",
+      "uz": "KidBookAI"
+    },
+    "description": {
+      "en": "Generates an illustrated, personalised eight-page storybook for a 2–6 year old in about two minutes, in Uzbek, Russian or English — with the character, clothing colour and drawing style held consistent from cover to final page.",
+      "uz": "2–6 yoshli bola uchun taxminan ikki daqiqada rasmli, shaxsiylashtirilgan 8 sahifali ertak yaratadi — o'zbek, rus va ingliz tillarida. Qahramon, kiyim rangi va chizma uslubi muqovadan oxirgi sahifagacha o'zgarmaydi."
+    },
+    "category": "Full-Stack AI",
+    "techStack": ["Node.js", "Express", "OpenAI", "React 18", "Vite", "Render", "Vercel"],
+    "image": "/projects/kidbook-ai.png",
+    "githubUrl": "https://github.com/Davron030901/KidBookAI",
+    "liveUrl": "https://kid-book-ai-pi.vercel.app",
+    "featured": true,
+    "caseStudy": {
+      "problem": {
+        "en": "Uzbek-speaking families have almost no personalised children's books, and image models break the illusion immediately: the child's hero changes face, hair and clothing colour from one page to the next, so the book stops being about their child.",
+        "uz": "O'zbekzabon oilalar uchun shaxsiylashtirilgan bolalar kitoblari deyarli yo'q, rasm generatsiya qiluvchi modellar esa taassurotni darhol buzadi: qahramonning yuzi, sochi va kiyim rangi sahifadan sahifaga o'zgarib ketadi — natijada kitob endi o'sha bola haqida bo'lmay qoladi."
+      },
+      "solution": {
+        "en": "A chained generation pipeline. One LLM call produces eight pages plus a character sheet and a style bible. A validation pass checks page count, age-appropriate word count, the child's name on every page and a banned-word list, and rewrites any page that falls outside the bounds. A single reference image becomes the visual anchor, and every later illustration is generated against that reference and the previous page.",
+        "uz": "Zanjirli generatsiya pipeline'i. Bitta LLM chaqiruvi 8 sahifani, `character_sheet` va `style_bible`ni beradi. Validatsiya bosqichi sahifalar sonini, yoshga mos so'zlar sonini, har sahifada bolaning ismi borligini va taqiqlangan so'zlar ro'yxatini tekshiradi hamda chegaradan chiqqan sahifalarni qayta yozdiradi. Bitta referens rasm vizual langar bo'lib xizmat qiladi va keyingi har bir rasm o'sha referens va oldingi sahifaga bog'lab yaratiladi."
+      },
+      "architecture": {
+        "en": "Node + Express with the OpenAI API on Render, React 18 + Vite on Vercel, talking over HTTP with CORS. Generation runs in the background: POST /api/books returns 202 with an id immediately and the client polls for progress, so a two-minute job never sits inside a request.",
+        "uz": "Render'da Node + Express va OpenAI API, Vercel'da React 18 + Vite; ikkalasi HTTP (CORS) orqali gaplashadi. Generatsiya fon rejimida ketadi: POST /api/books ishni kutmasdan darhol 202 va `id` qaytaradi, klient esa progressni poll qiladi — shu sababli ikki daqiqalik vazifa hech qachon so'rov ichida turib qolmaydi."
+      },
+      "results": {
+        "en": "An eight-page illustrated book in about two minutes, in Uzbek, Russian or English, with the character, clothing colour and drawing style consistent from the cover through page eight. The chaining is what holds the identity together — not luck.",
+        "uz": "Taxminan ikki daqiqada 8 sahifali rasmli kitob — o'zbek, rus yoki ingliz tilida; qahramon, kiyim rangi va chizma uslubi muqovadan 8-sahifagacha bir xil. Qahramon o'ziga o'xshab qolishini omad emas, aynan shu zanjirli yondashuv ta'minlaydi."
+      }
+    }
+  },
+  {
+    "slug": "student-performance-early-warning-system",
+    "title": {
+      "en": "Student Performance Early-Warning System",
+      "uz": "Talaba Muvaffaqiyati Erta Ogohlantirish Tizimi"
+    },
+    "description": {
+      "en": "Flags students at risk of failing or withdrawing at 30% of the way through a course — early enough for staff to act — and explains every flag in plain language using SHAP.",
+      "uz": "Kursning 30% qismi o'tganda — xodimlar hali ta'sir ko'rsata oladigan paytda — kursni tugatmaslik xavfi bor talabalarni belgilaydi va har bir ogohlantirishni SHAP orqali oddiy tilda izohlaydi."
+    },
+    "category": "ML",
+    "techStack": ["Python", "XGBoost", "SHAP", "FastAPI", "React", "TypeScript", "Render", "Vercel"],
+    "image": "/projects/student-performance-early-warning-system.png",
+    "githubUrl": "https://github.com/Davron030901/Student-Performance-Early-Warning-System",
+    "liveUrl": "https://student-performance-early-warning-s.vercel.app",
+    "featured": true,
+    "caseStudy": {
+      "problem": {
+        "en": "Universities usually learn a student is in trouble when the final result arrives — too late to help. Any earlier signal has to be built only from information that genuinely exists at that point in the term, not from data that leaks backwards from the outcome.",
+        "uz": "Universitetlar talabaning qiynalayotganini odatda yakuniy natija chiqqanda biladi — yordam berish uchun juda kech. Erta signal esa faqat o'sha paytda haqiqatan mavjud bo'lgan ma'lumotdan qurilishi kerak, natijadan orqaga sizib o'tgan ma'lumotdan emas."
+      },
+      "solution": {
+        "en": "Predict one binary flag — at risk of Fail or Withdrawn — at 30% of the way through the course, from behavioural signals only. Recall (F2) is the primary metric, because a needless check-in costs one conversation while a missed student can cost them the course. Every flag ships with a plain-language SHAP reason.",
+        "uz": "Kursning 30% qismida faqat xulq-atvor signallari asosida bitta binar bayroq bashorat qilinadi — 'Fail' yoki 'Withdrawn' xavfi. Asosiy metrika sifatida recall (F2) tanlangan: keraksiz suhbat bitta qo'ng'iroqqa tushadi, e'tibordan qolgan talaba esa butun kursni yo'qotishi mumkin. Har bir bayroq SHAP asosidagi tushunarli izoh bilan beriladi."
+      },
+      "architecture": {
+        "en": "A Python pipeline with one shared cutoff function that both training and inference must pass through: assessments are filtered by due date rather than submission date, and outcome fields are dropped structurally instead of by convention. The XGBoost artifact is served by FastAPI; a React + TypeScript advisor dashboard on Vercel also runs standalone on seeded data.",
+        "uz": "Python pipeline'ida bitta umumiy cutoff funksiyasi bor va uni ham trening, ham inference bosqichi majburan bosib o'tadi: topshiriqlar topshirilgan sana bo'yicha emas, muddat sanasi bo'yicha filtrlanadi, natija ustunlari esa kelishuv asosida emas, tuzilmaviy tarzda olib tashlanadi. XGBoost artefaktini FastAPI xizmat qiladi; Vercel'dagi React + TypeScript maslahatchi paneli backend'siz, namunaviy ma'lumotda ham ishlaydi."
+      },
+      "results": {
+        "en": "On a held-out course presentation the model never trained on: recall 0.781, precision 0.714, F2 0.767, ROC-AUC 0.911 — against a no-submissions rule at 0.620 recall and 0.575 AUC. Out of 560 students, 150 struggling students were caught, 42 missed and 60 flagged unnecessarily. Moving the checkpoint from 50% to 20% of the course costs about three points of recall, which is what makes an early flag defensible.",
+        "uz": "Model umuman ko'rmagan alohida kurs oqimida: recall 0.781, precision 0.714, F2 0.767, ROC-AUC 0.911 — 'topshiriq topshirmagan' qoidasining 0.620 recall va 0.575 AUC natijasiga qarshi. 560 talabadan 150 tasi to'g'ri aniqlandi, 42 tasi o'tkazib yuborildi, 60 tasi ortiqcha belgilandi. Nazorat nuqtasini 50% dan 20% ga surish recall'ga taxminan uch foiz punkt turadi — aynan shu erta ogohlantirishni asosli qiladi."
+      }
+    }
+  },
+  {
+    "slug": "agentic-rag-system",
+    "title": {
+      "en": "Adaptive Multimodal Agentic RAG Assistant",
+      "uz": "Adaptiv Multimodal Agentik RAG Yordamchi"
+    },
+    "description": {
+      "en": "A document Q&A agent that grades its own retrieved passages, falls back to live web search when the documents are thin, then grades its own answer for grounding and relevance — self-correcting in a loop with a hard stop.",
+      "uz": "Hujjatlar bo'yicha savol-javob agenti: topilgan parchalarni o'zi baholaydi, hujjatlar yetarli bo'lmasa jonli veb-qidiruvga o'tadi, so'ng o'z javobini manbaga asoslanganlik va savolga mosligi bo'yicha baholaydi — qat'iy to'xtash chegarasi bilan o'zini o'zi tuzatuvchi tsiklda."
+    },
+    "category": "LLM & RAG",
+    "techStack": ["LangGraph", "LangChain", "Qdrant", "OpenAI", "Gemini", "Tavily", "FastAPI", "Next.js", "TypeScript"],
+    "image": "/projects/agentic-rag-system.png",
+    "githubUrl": "https://github.com/Davron030901/Agentic-Rag-system",
+    "liveUrl": "https://agentic-rag-system-nine.vercel.app",
+    "featured": false
+  },
+  {
+    "slug": "retail-demand-forecasting",
+    "title": {
+      "en": "Retail Demand Forecasting",
+      "uz": "Chakana Savdo Talabini Bashoratlash"
+    },
+    "description": {
+      "en": "Daily unit-level demand forecasts per store-product pair with an 80% prediction interval, delivered in a planner-facing dashboard rather than a notebook. WAPE 24.7% against a 34.6% moving-average baseline.",
+      "uz": "Har bir do'kon-mahsulot juftligi uchun 80% bashorat oralig'i bilan kunlik talab prognozi — notebook emas, rejalashtiruvchi ishlatadigan dashboard ko'rinishida. WAPE 24.7%, bazaviy siljuvchi o'rtachaning 34.6% natijasiga qarshi."
+    },
+    "category": "ML",
+    "techStack": ["Python", "LightGBM", "FastAPI", "React", "TypeScript", "Tailwind CSS", "Docker"],
+    "image": "/projects/retail-demand-forecasting.png",
+    "githubUrl": "https://github.com/Davron030901/Retail-Demand-Forecasting",
+    "liveUrl": "https://retail-demand-forecasting-five.vercel.app",
+    "featured": false
+  },
+  {
+    "slug": "retention-signal-banking-churn",
+    "title": {
+      "en": "Retention Signal — Digital Banking Churn Prediction",
+      "uz": "Retention Signal — Raqamli Bank Churn Bashorati"
+    },
+    "description": {
+      "en": "Turns twelve months of account behaviour into a churn probability, a risk band, a recommended action and a SHAP-backed reason — delivered as a ranked call list for a retention team.",
+      "uz": "O'n ikki oylik hisob faoliyatini churn ehtimoli, xavf darajasi, tavsiya etilgan harakat va SHAP asosidagi izohga aylantiradi — ushlab qolish jamoasi uchun tartiblangan qo'ng'iroqlar ro'yxati ko'rinishida."
+    },
+    "category": "ML",
+    "techStack": ["Python", "XGBoost", "SHAP", "FastAPI", "React", "TypeScript", "Docker"],
+    "image": "/projects/retention-signal-banking-churn.png",
+    "githubUrl": "https://github.com/Davron030901/Retention-Signal-Digital-Banking-Churn-Prediction",
+    "liveUrl": "https://retention-signal-digital-banking-ch.vercel.app",
+    "featured": false
+  },
+  {
+    "slug": "hospital-appointment-no-show-prediction",
+    "title": {
+      "en": "Hospital Appointment No-Show Prediction",
+      "uz": "Shifoxona Qabuliga Kelmaslikni Bashoratlash"
+    },
+    "description": {
+      "en": "Ranks outpatient appointments by no-show risk so reminder effort goes where it changes an outcome. The threshold is set by call-desk capacity rather than by a metric.",
+      "uz": "Ambulator qabullarni kelmaslik xavfi bo'yicha tartiblaydi — shunda eslatma qilish sa'y-harakati natijani o'zgartiradigan joyga yo'naltiriladi. Chegara metrikaga emas, qo'ng'iroq markazining real quvvatiga qarab belgilanadi."
+    },
+    "category": "ML",
+    "techStack": ["Python", "LightGBM", "FastAPI", "React", "TypeScript", "Docker", "Render"],
+    "image": "/projects/hospital-appointment-no-show-prediction.png",
+    "githubUrl": "https://github.com/Davron030901/Hospital-Appointment-No-Show-Prediction",
+    "liveUrl": "https://hospital-appointment-no-show-predic.vercel.app",
+    "featured": false
+  },
+  {
+    "slug": "public-service-sla-breach-prediction",
+    "title": {
+      "en": "Public Service SLA Breach Prediction",
+      "uz": "Davlat Xizmatlarida SLA Buzilishini Bashoratlash"
+    },
+    "description": {
+      "en": "Scores government-service cases while they are still open, estimating the chance of missing the service deadline so work can be re-prioritised before the breach rather than explained after it.",
+      "uz": "Davlat xizmat markazidagi murojaatlarni hali ochiq turgan paytda baholaydi va muddatni o'tkazib yuborish ehtimolini beradi — shunda ish buzilishdan keyin tushuntirilmasdan, undan oldin qayta tartiblanadi."
+    },
+    "category": "ML",
+    "techStack": ["Python", "LightGBM", "FastAPI", "React", "TypeScript", "Docker"],
+    "image": "/projects/public-service-sla-breach-prediction.png",
+    "githubUrl": "https://github.com/Davron030901/Public-Service-SLA-Breach-Prediction",
+    "liveUrl": "https://public-service-sla-breach-predictio.vercel.app",
+    "featured": false
+  },
+  {
+    "slug": "automatic-transaction-categorization",
+    "title": {
+      "en": "Automatic Transaction Categorization",
+      "uz": "Bank Tranzaksiyalarini Avtomatik Toifalash"
+    },
+    "description": {
+      "en": "Assigns spending categories to raw bank transaction strings and shows its confidence instead of hiding it — holding auto-categorisation above 99% precision and flagging the rest for review. Selected on unseen-merchant score, not validation score.",
+      "uz": "Bank tranzaksiyalarining xom matnini xarajat toifalariga ajratadi va ishonch darajasini yashirmasdan ko'rsatadi: avtomatik toifalash aniqligini 99% dan yuqori ushlab turadi, qolganini ko'rikka belgilaydi. Model validatsiya bali bo'yicha emas, ilgari ko'rilmagan sotuvchilardagi natija bo'yicha tanlangan."
+    },
+    "category": "ML",
+    "techStack": ["Python", "scikit-learn", "TF-IDF", "FastAPI", "React", "TypeScript", "Docker"],
+    "image": "/projects/automatic-transaction-categorization.png",
+    "githubUrl": "https://github.com/Davron030901/Automatic-Transaction-Categorization",
+    "liveUrl": "https://automatic-transaction-categorizatio.vercel.app",
+    "featured": false
+  },
+  {
+    "slug": "medical-request-triage-routing",
+    "title": {
+      "en": "Medical Request Triage & Routing",
+      "uz": "Tibbiy Murojaatlarni Triaj va Yo'naltirish"
+    },
+    "description": {
+      "en": "Reads an incoming patient message and suggests which team should handle it, with a seventh 'needs human review' route for anything low-confidence, unreadable or ambiguous. Triage support only — it does not diagnose.",
+      "uz": "Bemordan kelgan xabarni o'qib, uni qaysi jamoa ko'rib chiqishi kerakligini taklif qiladi; ishonch past, matn tushunarsiz yoki ikki xil so'rov aralash bo'lsa — yettinchi, 'inson ko'rigi' yo'nalishiga yuboradi. Bu faqat triaj yordamchisi, tashxis qo'ymaydi."
+    },
+    "category": "ML",
+    "techStack": ["Python", "scikit-learn", "TF-IDF", "LinearSVC", "FastAPI", "React", "TypeScript", "Tailwind CSS"],
+    "image": "/projects/medical-request-triage-routing.png",
+    "githubUrl": "https://github.com/Davron030901/Medical-Request-Triage-Routing",
+    "liveUrl": "https://medical-request-triage-routing.vercel.app",
+    "featured": false
+  },
+  {
+    "slug": "product-review-intelligence-system",
+    "title": {
+      "en": "Product Review Intelligence System",
+      "uz": "Mahsulot Sharhlari Tahlil Tizimi"
+    },
+    "description": {
+      "en": "Turns raw marketplace review text into sentiment plus specific issue categories — delivery, packaging, quality — and routes anything the model is unsure about to a human review queue instead of guessing.",
+      "uz": "Marketpleys sharhlarining xom matnini sentiment va aniq muammo toifalariga — yetkazib berish, qadoqlash, sifat — aylantiradi; model ishonchsiz bo'lgan holatlarni taxmin qilish o'rniga inson ko'rigi navbatiga yuboradi."
+    },
+    "category": "ML",
+    "techStack": ["Python", "scikit-learn", "NLP", "FastAPI", "React", "TypeScript", "Docker"],
+    "image": "/projects/product-review-intelligence-system.png",
+    "githubUrl": "https://github.com/Davron030901/Product-Review-Intelligence-System",
+    "liveUrl": "https://product-review-intelligence-system.vercel.app",
+    "featured": false
+  },
+  {
+    "slug": "student-learning-segmentation",
+    "title": {
+      "en": "Student Learning Segmentation",
+      "uz": "Talabalarni O'quv Xulqi Bo'yicha Segmentlash"
+    },
+    "description": {
+      "en": "Unsupervised segmentation of online learners by behaviour alone — no grades used — surfacing five stable, interpretable profiles for student-success teams. Silhouette 0.296 on held-out students against 0.009 for a completion-rate baseline.",
+      "uz": "Onlayn o'quvchilarni faqat xulq-atvori bo'yicha nazoratsiz segmentlash — baholardan umuman foydalanmasdan — talabalar muvaffaqiyati jamoasi uchun beshta barqaror va tushunarli profilni ochib beradi. Ajratilgan talabalarda silhouette 0.296, bazaviy yondashuvda esa 0.009."
+    },
+    "category": "ML",
+    "techStack": ["Python", "scikit-learn", "K-Means", "FastAPI", "React", "Vite", "Docker"],
+    "image": "/projects/student-learning-segmentation.png",
+    "githubUrl": "https://github.com/Davron030901/Student-Learning-Segmentation",
+    "liveUrl": "https://student-learning-segmentation.vercel.app",
+    "featured": false
+  },
+  {
+    "slug": "telecom-churn",
+    "title": {
+      "en": "Telecom Churn Prediction",
+      "uz": "Telekom Mijozlar Ketishi Bashorati"
+    },
+    "description": {
+      "en": "Churn scoring for telecom subscribers, split into a Python inference API and a web dashboard that turns model scores into a retention work queue.",
+      "uz": "Telekom abonentlari uchun churn skoringi: Python inference API va model skorlarini ushlab qolish ish navbatiga aylantiradigan veb-panel."
+    },
+    "category": "ML",
+    "techStack": ["Python", "scikit-learn", "FastAPI", "React", "TypeScript", "Vercel"],
+    "image": "/projects/telecom-churn.png",
+    "githubUrl": "https://github.com/Davron030901/Telecom-Churn",
+    "liveUrl": "https://telecom-churn-wheat.vercel.app",
+    "featured": false
+  },
+  {
+    "slug": "road-damage-image-classification",
+    "title": {
+      "en": "Road Damage Image Classification",
+      "uz": "Yo'l Qoplamasi Shikastlanishini Tasnif Qilish"
+    },
+    "description": {
+      "en": "Gives a municipal inspection queue a first automatic read on road-condition photos. Selected and early-stopped on macro-F1 rather than accuracy, so rare damage types are not quietly ignored.",
+      "uz": "Munitsipal tekshiruv navbatidagi yo'l holati fotosuratlariga birinchi avtomatik baho beradi. Model aniqlik (accuracy) emas, macro-F1 bo'yicha tanlangan va to'xtatilgan — shuning uchun kam uchraydigan shikast turlari e'tibordan chetda qolmaydi."
+    },
+    "category": "CV",
+    "techStack": ["PyTorch", "ResNet50", "MobileNetV3", "FastAPI", "React", "TypeScript", "Vite", "Docker"],
+    "image": "/projects/road-damage-image-classification.png",
+    "githubUrl": "https://github.com/Davron030901/Road-Damage-Image-Classification",
+    "liveUrl": "https://road-damage-image-classification.vercel.app",
+    "featured": false
+  }
+]
