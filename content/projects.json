@@ -10,7 +10,17 @@
       "uz": "Faqat bitta real bank kredit shartnomasi bo'yicha savollarga javob beradigan va har bir javobga sahifa raqamini ilova qiladigan ataylab tor ixtisoslashgan RAG agenti. Doiradan tashqaridagi hamma narsa — maslahat, boshqa banklar, prompt-inyeksiyalar — qidiruv boshlanishidan oldin rad etiladi."
     },
     "category": "LLM & RAG",
-    "techStack": ["Next.js", "TypeScript", "Tailwind CSS", "FastAPI", "Python", "OpenAI", "Gemini", "Qdrant", "Render"],
+    "techStack": [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "FastAPI",
+      "Python",
+      "OpenAI",
+      "Gemini",
+      "Qdrant",
+      "Render"
+    ],
     "image": "/projects/loan-terms-assistant.png",
     "githubUrl": "https://github.com/Davron030901/Loan-Terms-Assistant",
     "liveUrl": "https://loan-terms-assistant.vercel.app",
@@ -45,7 +55,18 @@
       "uz": "Supervayzer agent rejalashtiradi va to'rtta mutaxassisga — hujjatlar, veb, text-to-SQL va izolyatsiyalangan kod — vazifa taqsimlaydi; javob foydalanuvchiga yetib borishidan oldin kritik agent uni tekshiradi. RAGAS bilan baholanadi va boshidan oxirigacha kuzatiladi."
     },
     "category": "LLM & RAG",
-    "techStack": ["LangGraph", "Python", "Qdrant", "Gemini", "Tavily", "Langfuse", "RAGAS", "FastAPI", "Next.js", "TypeScript"],
+    "techStack": [
+      "LangGraph",
+      "Python",
+      "Qdrant",
+      "Gemini",
+      "Tavily",
+      "Langfuse",
+      "RAGAS",
+      "FastAPI",
+      "Next.js",
+      "TypeScript"
+    ],
     "image": "/projects/multi-agent-ai-analyst.png",
     "githubUrl": "https://github.com/Davron030901/Multi-Agent-AI-Analyst-Guide-1",
     "liveUrl": "https://multi-agent-ai-analyst-guide-1.vercel.app",
@@ -80,7 +101,15 @@
       "uz": "2–6 yoshli bola uchun taxminan ikki daqiqada rasmli, shaxsiylashtirilgan 8 sahifali ertak yaratadi — o'zbek, rus va ingliz tillarida. Qahramon, kiyim rangi va chizma uslubi muqovadan oxirgi sahifagacha o'zgarmaydi."
     },
     "category": "Full-Stack AI",
-    "techStack": ["Node.js", "Express", "OpenAI", "React 18", "Vite", "Render", "Vercel"],
+    "techStack": [
+      "Node.js",
+      "Express",
+      "OpenAI",
+      "React 18",
+      "Vite",
+      "Render",
+      "Vercel"
+    ],
     "image": "/projects/kidbook-ai.png",
     "githubUrl": "https://github.com/Davron030901/KidBookAI",
     "liveUrl": "https://kid-book-ai-pi.vercel.app",
@@ -115,7 +144,16 @@
       "uz": "Kursning 30% qismi o'tganda — xodimlar hali ta'sir ko'rsata oladigan paytda — kursni tugatmaslik xavfi bor talabalarni belgilaydi va har bir ogohlantirishni SHAP orqali oddiy tilda izohlaydi."
     },
     "category": "ML",
-    "techStack": ["Python", "XGBoost", "SHAP", "FastAPI", "React", "TypeScript", "Render", "Vercel"],
+    "techStack": [
+      "Python",
+      "XGBoost",
+      "SHAP",
+      "FastAPI",
+      "React",
+      "TypeScript",
+      "Render",
+      "Vercel"
+    ],
     "image": "/projects/student-performance-early-warning-system.png",
     "githubUrl": "https://github.com/Davron030901/Student-Performance-Early-Warning-System",
     "liveUrl": "https://student-performance-early-warning-s.vercel.app",
@@ -150,7 +188,17 @@
       "uz": "Hujjatlar bo'yicha savol-javob agenti: topilgan parchalarni o'zi baholaydi, hujjatlar yetarli bo'lmasa jonli veb-qidiruvga o'tadi, so'ng o'z javobini manbaga asoslanganlik va savolga mosligi bo'yicha baholaydi — qat'iy to'xtash chegarasi bilan o'zini o'zi tuzatuvchi tsiklda."
     },
     "category": "LLM & RAG",
-    "techStack": ["LangGraph", "LangChain", "Qdrant", "OpenAI", "Gemini", "Tavily", "FastAPI", "Next.js", "TypeScript"],
+    "techStack": [
+      "LangGraph",
+      "LangChain",
+      "Qdrant",
+      "OpenAI",
+      "Gemini",
+      "Tavily",
+      "FastAPI",
+      "Next.js",
+      "TypeScript"
+    ],
     "image": "/projects/agentic-rag-system.png",
     "githubUrl": "https://github.com/Davron030901/Agentic-Rag-system",
     "liveUrl": "https://agentic-rag-system-nine.vercel.app",
@@ -167,7 +215,15 @@
       "uz": "Har bir do'kon-mahsulot juftligi uchun 80% bashorat oralig'i bilan kunlik talab prognozi — notebook emas, rejalashtiruvchi ishlatadigan dashboard ko'rinishida. WAPE 24.7%, bazaviy siljuvchi o'rtachaning 34.6% natijasiga qarshi."
     },
     "category": "ML",
-    "techStack": ["Python", "LightGBM", "FastAPI", "React", "TypeScript", "Tailwind CSS", "Docker"],
+    "techStack": [
+      "Python",
+      "LightGBM",
+      "FastAPI",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Docker"
+    ],
     "image": "/projects/retail-demand-forecasting.png",
     "githubUrl": "https://github.com/Davron030901/Retail-Demand-Forecasting",
     "liveUrl": "https://retail-demand-forecasting-five.vercel.app",
@@ -184,7 +240,15 @@
       "uz": "O'n ikki oylik hisob faoliyatini churn ehtimoli, xavf darajasi, tavsiya etilgan harakat va SHAP asosidagi izohga aylantiradi — ushlab qolish jamoasi uchun tartiblangan qo'ng'iroqlar ro'yxati ko'rinishida."
     },
     "category": "ML",
-    "techStack": ["Python", "XGBoost", "SHAP", "FastAPI", "React", "TypeScript", "Docker"],
+    "techStack": [
+      "Python",
+      "XGBoost",
+      "SHAP",
+      "FastAPI",
+      "React",
+      "TypeScript",
+      "Docker"
+    ],
     "image": "/projects/retention-signal-banking-churn.png",
     "githubUrl": "https://github.com/Davron030901/Retention-Signal-Digital-Banking-Churn-Prediction",
     "liveUrl": "https://retention-signal-digital-banking-ch.vercel.app",
@@ -201,7 +265,15 @@
       "uz": "Ambulator qabullarni kelmaslik xavfi bo'yicha tartiblaydi — shunda eslatma qilish sa'y-harakati natijani o'zgartiradigan joyga yo'naltiriladi. Chegara metrikaga emas, qo'ng'iroq markazining real quvvatiga qarab belgilanadi."
     },
     "category": "ML",
-    "techStack": ["Python", "LightGBM", "FastAPI", "React", "TypeScript", "Docker", "Render"],
+    "techStack": [
+      "Python",
+      "LightGBM",
+      "FastAPI",
+      "React",
+      "TypeScript",
+      "Docker",
+      "Render"
+    ],
     "image": "/projects/hospital-appointment-no-show-prediction.png",
     "githubUrl": "https://github.com/Davron030901/Hospital-Appointment-No-Show-Prediction",
     "liveUrl": "https://hospital-appointment-no-show-predic.vercel.app",
@@ -218,7 +290,14 @@
       "uz": "Davlat xizmat markazidagi murojaatlarni hali ochiq turgan paytda baholaydi va muddatni o'tkazib yuborish ehtimolini beradi — shunda ish buzilishdan keyin tushuntirilmasdan, undan oldin qayta tartiblanadi."
     },
     "category": "ML",
-    "techStack": ["Python", "LightGBM", "FastAPI", "React", "TypeScript", "Docker"],
+    "techStack": [
+      "Python",
+      "LightGBM",
+      "FastAPI",
+      "React",
+      "TypeScript",
+      "Docker"
+    ],
     "image": "/projects/public-service-sla-breach-prediction.png",
     "githubUrl": "https://github.com/Davron030901/Public-Service-SLA-Breach-Prediction",
     "liveUrl": "https://public-service-sla-breach-predictio.vercel.app",
@@ -235,7 +314,15 @@
       "uz": "Bank tranzaksiyalarining xom matnini xarajat toifalariga ajratadi va ishonch darajasini yashirmasdan ko'rsatadi: avtomatik toifalash aniqligini 99% dan yuqori ushlab turadi, qolganini ko'rikka belgilaydi. Model validatsiya bali bo'yicha emas, ilgari ko'rilmagan sotuvchilardagi natija bo'yicha tanlangan."
     },
     "category": "ML",
-    "techStack": ["Python", "scikit-learn", "TF-IDF", "FastAPI", "React", "TypeScript", "Docker"],
+    "techStack": [
+      "Python",
+      "scikit-learn",
+      "TF-IDF",
+      "FastAPI",
+      "React",
+      "TypeScript",
+      "Docker"
+    ],
     "image": "/projects/automatic-transaction-categorization.png",
     "githubUrl": "https://github.com/Davron030901/Automatic-Transaction-Categorization",
     "liveUrl": "https://automatic-transaction-categorizatio.vercel.app",
@@ -252,7 +339,16 @@
       "uz": "Bemordan kelgan xabarni o'qib, uni qaysi jamoa ko'rib chiqishi kerakligini taklif qiladi; ishonch past, matn tushunarsiz yoki ikki xil so'rov aralash bo'lsa — yettinchi, 'inson ko'rigi' yo'nalishiga yuboradi. Bu faqat triaj yordamchisi, tashxis qo'ymaydi."
     },
     "category": "ML",
-    "techStack": ["Python", "scikit-learn", "TF-IDF", "LinearSVC", "FastAPI", "React", "TypeScript", "Tailwind CSS"],
+    "techStack": [
+      "Python",
+      "scikit-learn",
+      "TF-IDF",
+      "LinearSVC",
+      "FastAPI",
+      "React",
+      "TypeScript",
+      "Tailwind CSS"
+    ],
     "image": "/projects/medical-request-triage-routing.png",
     "githubUrl": "https://github.com/Davron030901/Medical-Request-Triage-Routing",
     "liveUrl": "https://medical-request-triage-routing.vercel.app",
@@ -269,7 +365,14 @@
       "uz": "Marketpleys sharhlarining xom matnini sentiment va aniq muammo toifalariga — yetkazib berish, qadoqlash, sifat — aylantiradi; model ishonchsiz bo'lgan holatlarni taxmin qilish o'rniga inson ko'rigi navbatiga yuboradi."
     },
     "category": "ML",
-    "techStack": ["Python", "scikit-learn", "NLP", "FastAPI", "React", "TypeScript", "Docker"],
+    "techStack": [
+      "Python",
+      "scikit-learn",
+      "FastAPI",
+      "React",
+      "TypeScript",
+      "Docker"
+    ],
     "image": "/projects/product-review-intelligence-system.png",
     "githubUrl": "https://github.com/Davron030901/Product-Review-Intelligence-System",
     "liveUrl": "https://product-review-intelligence-system.vercel.app",
@@ -286,7 +389,15 @@
       "uz": "Onlayn o'quvchilarni faqat xulq-atvori bo'yicha nazoratsiz segmentlash — baholardan umuman foydalanmasdan — talabalar muvaffaqiyati jamoasi uchun beshta barqaror va tushunarli profilni ochib beradi. Ajratilgan talabalarda silhouette 0.296, bazaviy yondashuvda esa 0.009."
     },
     "category": "ML",
-    "techStack": ["Python", "scikit-learn", "K-Means", "FastAPI", "React", "Vite", "Docker"],
+    "techStack": [
+      "Python",
+      "scikit-learn",
+      "K-Means",
+      "FastAPI",
+      "React",
+      "Vite",
+      "Docker"
+    ],
     "image": "/projects/student-learning-segmentation.png",
     "githubUrl": "https://github.com/Davron030901/Student-Learning-Segmentation",
     "liveUrl": "https://student-learning-segmentation.vercel.app",
@@ -303,7 +414,14 @@
       "uz": "Telekom abonentlari uchun churn skoringi: Python inference API va model skorlarini ushlab qolish ish navbatiga aylantiradigan veb-panel."
     },
     "category": "ML",
-    "techStack": ["Python", "scikit-learn", "FastAPI", "React", "TypeScript", "Vercel"],
+    "techStack": [
+      "Python",
+      "scikit-learn",
+      "FastAPI",
+      "React",
+      "TypeScript",
+      "Vercel"
+    ],
     "image": "/projects/telecom-churn.png",
     "githubUrl": "https://github.com/Davron030901/Telecom-Churn",
     "liveUrl": "https://telecom-churn-wheat.vercel.app",
@@ -320,7 +438,16 @@
       "uz": "Munitsipal tekshiruv navbatidagi yo'l holati fotosuratlariga birinchi avtomatik baho beradi. Model aniqlik (accuracy) emas, macro-F1 bo'yicha tanlangan va to'xtatilgan — shuning uchun kam uchraydigan shikast turlari e'tibordan chetda qolmaydi."
     },
     "category": "CV",
-    "techStack": ["PyTorch", "ResNet50", "MobileNetV3", "FastAPI", "React", "TypeScript", "Vite", "Docker"],
+    "techStack": [
+      "PyTorch",
+      "ResNet50",
+      "MobileNetV3",
+      "FastAPI",
+      "React",
+      "TypeScript",
+      "Vite",
+      "Docker"
+    ],
     "image": "/projects/road-damage-image-classification.png",
     "githubUrl": "https://github.com/Davron030901/Road-Damage-Image-Classification",
     "liveUrl": "https://road-damage-image-classification.vercel.app",

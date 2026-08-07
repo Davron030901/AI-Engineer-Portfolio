@@ -3,7 +3,16 @@
 import { ui } from "@/content/ui";
 import { links, person } from "@/content/site";
 import { useLocale } from "@/components/providers/LocaleProvider";
-import { GitHubIcon, LinkedInIcon, MailIcon, TelegramIcon } from "@/components/Icons";
+import {
+  GitHubIcon,
+  LinkedInIcon,
+  MailIcon,
+  PhoneIcon,
+  TelegramIcon,
+} from "@/components/Icons";
+
+/** mailto: and tel: open a handler, not a page — they should not target _blank. */
+const EXTERNAL = new Set(["github", "linkedin", "telegram"]);
 
 export function Footer() {
   const { t } = useLocale();
@@ -29,6 +38,12 @@ export function Footer() {
       label: t(ui.contact.email),
       icon: <MailIcon />,
     },
+    links.phone && {
+      key: "phone",
+      href: `tel:${links.phone.replace(/\s/g, "")}`,
+      label: t(ui.contact.phone),
+      icon: <PhoneIcon />,
+    },
   ].filter(Boolean) as Array<{ key: string; href: string; label: string; icon: JSX.Element }>;
 
   return (
@@ -48,8 +63,8 @@ export function Footer() {
             <li key={social.key}>
               <a
                 href={social.href}
-                target={social.key === "email" ? undefined : "_blank"}
-                rel={social.key === "email" ? undefined : "noopener noreferrer"}
+                target={EXTERNAL.has(social.key) ? "_blank" : undefined}
+                rel={EXTERNAL.has(social.key) ? "noopener noreferrer" : undefined}
                 aria-label={social.label}
                 className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-line
                            text-ink-subtle transition-colors hover:border-line-strong hover:text-ink"

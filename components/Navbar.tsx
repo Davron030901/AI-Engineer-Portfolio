@@ -52,7 +52,8 @@ export function Navbar() {
           href="/"
           className="font-display text-h3 font-semibold tracking-tight text-ink"
         >
-          {person.name}
+          <span className="sm:hidden">{person.shortName}</span>
+          <span className="hidden sm:inline">{person.name}</span>
           <span className="text-accent">.</span>
         </Link>
 

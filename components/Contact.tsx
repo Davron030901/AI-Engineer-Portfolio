@@ -9,11 +9,19 @@ import {
   GitHubIcon,
   LinkedInIcon,
   MailIcon,
+  PhoneIcon,
   TelegramIcon,
 } from "@/components/Icons";
 import type { ReactNode } from "react";
 
-type Channel = { key: string; href: string; label: string; value: string; icon: ReactNode };
+type Channel = {
+  key: string;
+  href: string;
+  label: string;
+  value: string;
+  icon: ReactNode;
+  external?: boolean;
+};
 
 export function Contact() {
   const { t } = useLocale();
@@ -38,6 +46,15 @@ export function Contact() {
     value: links.github.replace("https://", ""),
     icon: <GitHubIcon />,
   });
+  if (links.phone) {
+    channels.push({
+      key: "phone",
+      href: `tel:${links.phone.replace(/\s/g, "")}`,
+      label: t(ui.contact.phone),
+      value: links.phone,
+      icon: <PhoneIcon />,
+    });
+  }
   if (links.linkedin) {
     channels.push({
       key: "linkedin",
@@ -45,6 +62,7 @@ export function Contact() {
       label: t(ui.contact.linkedin),
       value: links.linkedin.replace("https://", ""),
       icon: <LinkedInIcon />,
+      external: true,
     });
   }
   if (links.telegram) {
@@ -54,6 +72,7 @@ export function Contact() {
       label: t(ui.contact.telegram),
       value: links.telegram.replace("https://", ""),
       icon: <TelegramIcon />,
+      external: true,
     });
   }
 
@@ -75,8 +94,8 @@ export function Contact() {
               <li>
                 <a
                   href={channel.href}
-                  target={channel.key === "email" ? undefined : "_blank"}
-                  rel={channel.key === "email" ? undefined : "noopener noreferrer"}
+                  target={channel.external ? "_blank" : undefined}
+                  rel={channel.external ? "noopener noreferrer" : undefined}
                   className="card flex items-center gap-4 p-4 hover:border-line-strong"
                 >
                   <span className="text-ink-subtle">{channel.icon}</span>

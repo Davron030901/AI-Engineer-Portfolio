@@ -14,7 +14,17 @@ export function Hero() {
   const reduced = useReducedMotion();
 
   const lines = [
-    { key: "role", node: <p className="eyebrow">{t(ui.hero.role)}</p> },
+    {
+      key: "role",
+      node: (
+        <p className="flex flex-wrap items-center gap-x-3 gap-y-1">
+          <span className="eyebrow">{t(ui.hero.role)}</span>
+          <span className="font-mono text-micro text-ink-subtle">
+            {t(person.location)}
+          </span>
+        </p>
+      ),
+    },
     {
       key: "name",
       node: (

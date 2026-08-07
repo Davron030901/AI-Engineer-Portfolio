@@ -85,6 +85,14 @@ export function MailIcon(props: IconProps) {
   );
 }
 
+export function PhoneIcon(props: IconProps) {
+  return (
+    <Icon {...props}>
+      <path d="M6.5 3.5h3l1.5 4-2 1.5a12 12 0 0 0 6 6l1.5-2 4 1.5v3a1.5 1.5 0 0 1-1.7 1.5C11.6 19.6 4.4 12.4 3.5 5.2A1.5 1.5 0 0 1 5 3.5h1.5Z" />
+    </Icon>
+  );
+}
+
 export function LinkedInIcon(props: IconProps) {
   return (
     <svg

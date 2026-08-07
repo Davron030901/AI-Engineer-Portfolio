@@ -7,8 +7,8 @@ import type { Category, Localized } from "@/lib/types";
 export const ui = {
   meta: {
     title: {
-      en: "Davron — AI / ML Engineer",
-      uz: "Davron — AI / ML muhandisi",
+      en: "Davron Aliqulov — AI Engineer",
+      uz: "Davron Aliqulov — AI muhandisi",
     },
     description: {
       en: "AI and ML engineer building systems that report their own error bars: retrieval agents with citation checks, risk models with stated limitations, and interfaces that flag what the model is unsure about.",
@@ -41,7 +41,7 @@ export const ui = {
   },
 
   hero: {
-    role: { en: "AI / ML Engineer", uz: "AI / ML muhandisi" },
+    role: { en: "AI Engineer", uz: "AI muhandisi" },
     tagline: {
       en: "I build machine-learning and LLM systems that report their own error bars — and refuse the questions they cannot answer.",
       uz: "Men o'z xatolik chegarasini ochiq ko'rsatadigan va javob bera olmaydigan savollarni rad etadigan mashinaviy o'rganish hamda LLM tizimlarini quraman.",
@@ -64,12 +64,9 @@ export const ui = {
         "Men uchun eng muhimi — halollik qatlami. Tasodifiy bo'linishda 0.99, ilgari ko'rilmagan sotuvchilarda esa 0.45 ko'rsatadigan model vazifani o'rganmagan, u brend nomlarini yodlab olgan; shuning uchun men qiyinroq raqam bo'yicha tanlayman va buni ochiq aytaman. Tizim yolg'iz qaror qilmasligi kerak bo'lgan joyda u taxmin qilmasdan odamga yo'naltiradi. Javob manbada yo'q bo'lsa, o'ylab topmaydi — yo'qligini aytadi.",
       ],
     },
-    // @todo Add your career-transition narrative — where you came from, what
-    // pulled you into ML, and what you are aiming at next. Two or three
-    // sentences, specific and personal. Rendered only once non-empty.
     story: {
-      en: "",
-      uz: "",
+      en: "I came to this from physical engineering at Karshi State University, then AI Solutions at PDP University. The part that shaped how I work was the year in between the theory and the systems: annotating and quality-checking training data for production models at Yandex, holding a 98% accuracy line and spending every day on exactly where models fail — the systematic errors, the edge cases, the confidently wrong output. That is where the habit came from. Since then I have been building backends for computer-vision systems and, in my own time, the fifteen end-to-end systems below.",
+      uz: "Men bu yerga Qarshi davlat universitetidagi fizika muhandisligidan, so'ng PDP University'dagi AI yo'nalishidan keldim. Ishlash uslubimni esa nazariya bilan tizimlar orasidagi o'sha yil shakllantirdi: Yandex'da production modellari uchun o'quv ma'lumotlarini annotatsiya qilib, sifatini tekshirib, 98% aniqlik chizig'ini ushlab turdim va har kunimni modellar aynan qayerda xato qilishiga sarfladim — tizimli xatolar, chekka holatlar, ishonch bilan aytilgan noto'g'ri javoblar. Bu odat o'sha yerdan. O'shandan beri kompyuter ko'rish tizimlari uchun backend quraman, bo'sh vaqtimda esa quyidagi o'n beshta tizimni yaratdim.",
     },
   },
 
@@ -122,22 +119,28 @@ export const ui = {
     eyebrow: { en: "Skills", uz: "Ko'nikmalar" },
     heading: { en: "What I work with", uz: "Men ishlatadigan texnologiyalar" },
     intro: {
-      en: "Grouped from the technologies actually used in the projects above — this list cannot drift away from the work.",
-      uz: "Yuqoridagi loyihalarda haqiqatan ishlatilgan texnologiyalardan guruhlangan — bu ro'yxat ishlardan ajralib qola olmaydi.",
+      en: "The number beside a badge is how many of the projects above use it. Skills without a number come from professional work rather than a project on this site.",
+      uz: "Belgi yonidagi raqam — uni yuqoridagi nechta loyiha ishlatgani. Raqamsiz ko'nikmalar bu saytdagi loyihadan emas, professional ishdan keladi.",
     },
-    usedIn: { en: "used in", uz: "loyihada" },
+    usedIn: { en: "projects use this", uz: "loyiha buni ishlatadi" },
+    fromWork: {
+      en: "from professional work, not a project here",
+      uz: "bu yerdagi loyihadan emas, ish tajribasidan",
+    },
     groups: {
       languages: { en: "Languages & Core", uz: "Tillar va asos" },
-      modelling: { en: "ML & Modelling", uz: "ML va modellashtirish" },
+      modelling: { en: "ML & Data Science", uz: "ML va Data Science" },
+      vision: { en: "Computer Vision", uz: "Kompyuter ko'rish" },
+      language: { en: "NLP & Text", uz: "NLP va matn" },
       agents: { en: "LLM & Agents", uz: "LLM va agentlar" },
       interfaces: { en: "APIs & Interfaces", uz: "API va interfeyslar" },
-      platform: { en: "Cloud, Data & DevOps", uz: "Bulut, ma'lumot va DevOps" },
+      platform: { en: "Cloud & Tooling", uz: "Bulut va vositalar" },
     },
   },
 
   experience: {
     eyebrow: { en: "Experience", uz: "Tajriba" },
-    heading: { en: "Roadmap", uz: "Yo'l xaritasi" },
+    heading: { en: "Where I have worked and studied", uz: "Qayerda ishlaganman va o'qiganman" },
   },
 
   contact: {
@@ -148,6 +151,7 @@ export const ui = {
       uz: "AI/ML muhandisligi bo'yicha ish va hamkorlik takliflariga ochiqman. Eng tez yo'l — elektron pochta.",
     },
     email: { en: "Email", uz: "Elektron pochta" },
+    phone: { en: "Phone", uz: "Telefon" },
     github: { en: "GitHub", uz: "GitHub" },
     linkedin: { en: "LinkedIn", uz: "LinkedIn" },
     telegram: { en: "Telegram", uz: "Telegram" },

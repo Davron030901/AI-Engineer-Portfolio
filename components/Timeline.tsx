@@ -9,8 +9,6 @@ import { SectionHeader } from "@/components/SectionHeader";
 export function Timeline() {
   const { t } = useLocale();
 
-  // Renders nothing until real entries exist, so the site never ships a
-  // section full of placeholder roles. See `timeline` in content/site.ts.
   if (timeline.length === 0) return null;
 
   return (
@@ -28,8 +26,15 @@ export function Timeline() {
           {timeline.map((entry, index) => (
             <Reveal key={`${entry.period}-${index}`} delay={index * 0.05}>
               <li className="relative pb-10 last:pb-0">
+                {/* Filled marks a role, hollow marks a degree — the timeline
+                    holds both, and the difference should be readable at a
+                    glance rather than spelled out in a label. */}
                 <span
-                  className="absolute -left-[1.85rem] top-2 h-2 w-2 rounded-full bg-accent sm:-left-[2.35rem]"
+                  className={
+                    entry.kind === "work"
+                      ? "absolute -left-[1.85rem] top-2 h-2 w-2 rounded-full bg-accent sm:-left-[2.35rem]"
+                      : "absolute -left-[1.85rem] top-2 h-2 w-2 rounded-full border border-accent bg-canvas sm:-left-[2.35rem]"
+                  }
                   aria-hidden="true"
                 />
                 <p className="font-mono text-micro uppercase tracking-wider text-accent">

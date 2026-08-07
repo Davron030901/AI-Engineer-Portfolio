@@ -5,56 +5,59 @@
 /*
  * Two palettes, tuned separately.
  *
- * Light leans on a cool paper-white with a deep indigo primary; dark drops to a
- * blue-black and lifts the primary and accent well above their light values so
- * they stay legible against it. Every foreground/background pair below clears
- * WCAG AA (4.5:1 for body text, 3:1 for large text and UI borders).
+ * The direction is quiet and cool rather than high-contrast: a soft blue-grey
+ * paper in light, a deep slate — not black — in dark, with a periwinkle primary
+ * and a muted teal that carries every measured figure on the site. Nothing here
+ * shouts; the work is supposed to.
+ *
+ * Every foreground/background pair below clears WCAG AA at 4.5:1 or better in
+ * both themes, checked against canvas, surface and raised.
  */
 @layer base {
   :root {
-    --canvas: 251 252 253;
+    --canvas: 247 248 251;
     --surface: 255 255 255;
-    --raised: 242 245 248;
-    --line: 223 229 236;
-    --line-strong: 190 201 214;
+    --raised: 239 242 247;
+    --line: 226 231 239;
+    --line-strong: 199 207 220;
 
-    --ink: 12 18 32; /* 17.4:1 on canvas */
-    --ink-muted: 85 97 122; /* 6.1:1 on canvas */
-    --ink-subtle: 108 120 145; /* 4.6:1 on canvas */
+    --ink: 27 35 52; /* 14.8:1 on canvas */
+    --ink-muted: 89 101 124; /* 5.5:1 */
+    --ink-subtle: 97 108 133; /* 4.7:1 on raised, the tightest case */
 
-    --primary: 42 69 196; /* 8.1:1 on canvas */
+    --primary: 66 86 199; /* 5.8:1 */
     --primary-ink: 255 255 255;
-    --primary-soft: 232 236 252;
+    --primary-soft: 231 234 250;
 
-    --accent: 11 110 117; /* 5.5:1 on canvas */
-    --accent-soft: 219 240 240;
+    --accent: 15 117 123; /* 4.9:1 on raised */
+    --accent-soft: 223 240 240;
 
-    --violet: 91 51 196; /* 8.4:1 on canvas */
-    --violet-soft: 238 233 253;
+    --violet: 106 76 201; /* 5.7:1 */
+    --violet-soft: 237 232 251;
 
     color-scheme: light;
   }
 
   .dark {
-    --canvas: 9 12 19;
-    --surface: 16 20 29;
-    --raised: 23 28 39;
-    --line: 35 42 56;
-    --line-strong: 55 64 82;
+    --canvas: 16 20 28;
+    --surface: 23 28 38;
+    --raised: 30 36 49;
+    --line: 42 49 64;
+    --line-strong: 61 71 87;
 
-    --ink: 232 236 244; /* 16.2:1 on canvas */
-    --ink-muted: 155 166 187; /* 7.6:1 on canvas */
-    --ink-subtle: 125 137 159; /* 5.2:1 on canvas */
+    --ink: 231 235 243; /* 15.4:1 on canvas */
+    --ink-muted: 162 173 192; /* 8.1:1 */
+    --ink-subtle: 130 142 163; /* 4.7:1 on raised, the tightest case */
 
-    --primary: 138 160 255; /* 8.6:1 on canvas */
-    --primary-ink: 9 12 19;
-    --primary-soft: 26 33 64;
+    --primary: 151 169 255; /* 8.3:1 */
+    --primary-ink: 16 20 28;
+    --primary-soft: 31 39 64;
 
-    --accent: 79 213 200; /* 11.4:1 on canvas */
-    --accent-soft: 15 44 44;
+    --accent: 95 216 203; /* 10.7:1 */
+    --accent-soft: 19 50 47;
 
-    --violet: 179 155 250; /* 9.2:1 on canvas */
-    --violet-soft: 34 27 61;
+    --violet: 188 166 251; /* 8.8:1 */
+    --violet-soft: 36 30 61;
 
     color-scheme: dark;
   }

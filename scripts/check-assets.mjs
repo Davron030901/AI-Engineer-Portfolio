@@ -86,14 +86,14 @@ if (warnings.length > 0) {
 }
 
 if (errors.length > 0) {
-  console.error(label("Blocking"));
-  for (const error of errors) console.error(`  ✗ ${error}`);
-  console.error("\nBuild stopped: fix the items above.\n");
+  console.log(label("Blocking"));
+  for (const error of errors) console.log(`  ✗ ${error}`);
+  console.log("\nBuild stopped: fix the items above.\n");
   process.exit(1);
 }
 
 if (strict && warnings.length > 0) {
-  console.error(
+  console.log(
     "\nBuild stopped: ASSETS_STRICT=1 and the site still has placeholders.\n" +
       "Finish the items above, or unset ASSETS_STRICT to deploy anyway.\n",
   );

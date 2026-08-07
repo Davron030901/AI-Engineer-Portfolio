@@ -1,5 +1,5 @@
 import { allTech, projects } from "./projects";
-import { skillGroups, techAliases, type SkillGroupKey } from "./site";
+import { cvOnlySkills, skillGroups, techAliases, type SkillGroupKey } from "./site";
 
 /** Version-pinned names collapse to their plain display name. */
 function display(tech: string): string {
@@ -14,27 +14,38 @@ for (const project of projects) {
   }
 }
 
-// The skills grid is only trustworthy if it covers exactly what the projects
-// use. Both directions are checked, so adding a technology to a project without
-// grouping it here — or leaving a group entry behind after removing it from a
-// project — fails `next build` instead of quietly changing the page.
+// The grid is only trustworthy if it accounts for everything, both directions.
+// A technology used by a project but left out of every group would silently
+// vanish; a group entry no project uses and the CV does not claim is a typo.
+// Either fails `next build` rather than changing the page.
 const usedNames = new Set(allTech.map(display));
 const groupedNames = new Set(Object.values(skillGroups).flat());
+const cvNames = new Set(cvOnlySkills);
 
 const ungrouped = [...usedNames].filter((name) => !groupedNames.has(name));
 if (ungrouped.length > 0) {
   throw new Error(
-    `content/site.ts — these technologies are used in projects.json but not placed in skillGroups: ${ungrouped.join(", ")}`,
+    `content/site.ts — used in projects.json but not placed in skillGroups: ${ungrouped.join(", ")}`,
   );
 }
 
-const orphaned = [...groupedNames].filter((name) => !usedNames.has(name));
-if (orphaned.length > 0) {
+const unaccounted = [...groupedNames].filter(
+  (name) => !usedNames.has(name) && !cvNames.has(name),
+);
+if (unaccounted.length > 0) {
   throw new Error(
-    `content/site.ts — these skillGroups entries are not used by any project: ${orphaned.join(", ")}`,
+    `content/site.ts — in skillGroups but used by no project and not listed in cvOnlySkills: ${unaccounted.join(", ")}`,
   );
 }
 
+const stale = [...cvNames].filter((name) => !groupedNames.has(name));
+if (stale.length > 0) {
+  throw new Error(
+    `content/site.ts — listed in cvOnlySkills but not placed in any group: ${stale.join(", ")}`,
+  );
+}
+
+/** `count` is 0 for skills that come from the CV rather than a project here. */
 export type Skill = { name: string; count: number };
 
 export const skillGroupEntries: Array<{ key: SkillGroupKey; items: Skill[] }> = (

@@ -37,28 +37,25 @@ should do once the list is empty.
 
 **In `content/site.ts`** (each line is tagged `@todo`):
 
-- **Full name** — currently just `Davron`.
-- **Email**, **LinkedIn**, **Telegram** — all `null`. The Contact section and
-  footer render only the channels that are set, so unset ones are simply absent
-  rather than dead links. GitHub is already wired.
-- **Timeline entries** — the array is empty, so the Experience section does not
-  render at all. Add entries and it appears.
-
-**In `content/ui.ts`:**
-
-- **`about.story`** — the career-transition paragraph. The two paragraphs above
-  it are written and shipping; this one is yours. Empty means it is skipped.
+- **LinkedIn** and **Telegram** — both `null`, because neither is on the CV. The
+  Contact section and footer render only the channels that are set, so unset
+  ones are simply absent rather than dead links. Email, phone and GitHub are
+  wired.
 
 **Assets:**
 
-- **CV** — `public/cv/cv.pdf` is a placeholder page that says so. Replace it with
-  your real CV, or rename it and update `cvPath` in `content/site.ts`.
 - **Screenshots** — all fifteen are placeholders. Capture each live demo at
   1280×800, save over `public/projects/<slug>.png`, and remove that slug from
   `content/pending-screenshots.json`. Cards show a `placeholder` tag and use
   "Screenshot pending for …" as alt text until you do.
-- **Open Graph image** — `public/og.png` carries the placeholder name. Regenerate
-  it once the name is final.
+
+Everything else — name, role, location, email, phone, the About story, the
+timeline and the CV at `public/cv/Davron-Aliqulov-CV.pdf` — is real and
+shipping.
+
+> **`ASSETS_STRICT` must stay unset until this list is empty.** With it set to
+> `1`, the build stops on purpose and the log ends with
+> `Build stopped: ASSETS_STRICT=1 and the site still has placeholders.`
 
 ---
 
@@ -100,6 +97,12 @@ from its own data:
    `content/site.ts`) must already appear in that project's own copy. Spelled-out
    numbers count, so "eight pages" in the copy backs "8 pages" on the card. A
    figure that appears nowhere in the data fails the build.
+
+The skills grid draws on two sources: technologies used by the projects here,
+which carry a count, and technologies from professional work that no project on
+this site demonstrates, which are declared in `cvOnlySkills` and render without
+one. A skill in neither place fails the build, so a typo cannot pass as a new
+skill.
 
 Adding a project: append to `content/projects.json`, drop a screenshot in
 `public/projects/`, and place any new technology into a group in
@@ -159,9 +162,12 @@ scripts/
 ## Design system
 
 Two palettes, tuned independently in `app/globals.css` — dark is not an
-inversion of light, and every foreground/background pair clears WCAG AA. Colours
-are CSS variables holding RGB triples, exposed to Tailwind as named tokens
-(`ink`, `ink-muted`, `canvas`, `surface`, `line`, `primary`, `accent`, …).
+inversion of light. The direction is quiet and cool: a soft blue-grey paper in
+light, a deep slate rather than black in dark, a periwinkle primary and a muted
+teal that carries every measured figure. Every foreground/background pair clears
+WCAG AA at 4.5:1 or better against canvas, surface and raised, in both themes.
+Colours are CSS variables holding RGB triples, exposed to Tailwind as named
+tokens (`ink`, `ink-muted`, `canvas`, `surface`, `line`, `primary`, `accent`, …).
 
 Type is Space Grotesk for display, Inter for body, JetBrains Mono for anything
 technical — badges, counts, figures, eyebrows. Sizes are fluid via `clamp()`.
@@ -216,5 +222,3 @@ screenshots. Keep them at 1280px wide, keep the `sizes` prop on every
 `vercel.json` only adds security headers and a cache rule for the CV. It
 deliberately does not set `builds` or `routes`, which would disable the Next.js
 preset.
-#   A I - E n g i n e e r - P o r t f o l i o  
- 
