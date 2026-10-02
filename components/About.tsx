@@ -11,7 +11,11 @@ export function About() {
   const story = t(ui.about.story);
 
   return (
-    <section id="about" className="border-b border-line py-section">
+    <section
+      id="about"
+      aria-labelledby="about-heading"
+      className="border-b border-line py-section"
+    >
       <div className="shell">
         <Reveal>
           <SectionHeader

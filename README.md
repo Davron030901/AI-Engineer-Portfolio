@@ -44,10 +44,14 @@ should do once the list is empty.
 
 **Assets:**
 
-- **Screenshots** — all fifteen are placeholders. Capture each live demo at
-  1280×800, save over `public/projects/<slug>.png`, and remove that slug from
-  `content/pending-screenshots.json`. Cards show a `placeholder` tag and use
-  "Screenshot pending for …" as alt text until you do.
+- **Screenshots** — none of the fifteen has been captured yet. Until one is,
+  the card draws a cover instead (`components/ProjectCover.tsx`): one motif per
+  kind of system — forecast band, risk ranking, routing, clusters, agent graph,
+  app windows, detection grid — shaped by the slug and drawn in theme tokens, so
+  it follows light and dark mode and never shows an invented number. To switch
+  a card to a real screenshot, capture the live demo at 1280×800, save it over
+  `public/projects/<slug>.png`, and remove that slug from
+  `content/pending-screenshots.json`.
 
 Everything else — name, role, location, email, phone, the About story, the
 timeline and the CV at `public/cv/Davron-Aliqulov-CV.pdf` — is real and
@@ -137,13 +141,16 @@ at every object that needs the new key.
 app/
   layout.tsx              fonts, metadata, JSON-LD, theme script, providers
   page.tsx                Hero · About · Projects · Skills · Timeline · Contact
-  projects/[slug]/        case study route, generateStaticParams over featured
+  projects/[slug]/        case study route + its generated Open Graph image
+  icon.svg apple-icon.png favicon and home-screen icon
   sitemap.ts robots.ts    both use the same resolved origin
 components/
-  providers/              LocaleProvider, ThemeProvider (+ the pre-paint script)
+  providers/              LocaleProvider, ThemeProvider (+ the pre-paint script),
+                          MotionProvider (reduced motion, once, for the whole tree)
   Navbar LanguageSwitcher ThemeToggle
   Hero About Skills SkillBadge Timeline Contact Footer
   Projects ProjectFilter ProjectCard FeaturedProjectCard CaseStudy
+  ProjectCover            drawn cover shown until a screenshot exists
   MetricRule              the signature element
   Reveal SectionHeader Icons
 content/
@@ -177,8 +184,11 @@ tick, in `components/MetricRule.tsx`. It marks the places where the page states
 something it can back up, which is the habit every project here shares. The
 boldness budget is spent there; everything around it stays quiet.
 
-Motion is transform and opacity only, and `Reveal` collapses to a plain render
-under `prefers-reduced-motion`.
+Motion is transform and opacity only. `prefers-reduced-motion` is honoured once,
+in `MotionProvider` (`<MotionConfig reducedMotion="user">`), which drops movement
+and keeps a plain fade. Components never branch on `useReducedMotion()`: the
+server cannot know the preference, so a branch renders different markup on the
+client and leaves the server's `opacity: 0` in place.
 
 ---
 
@@ -215,7 +225,7 @@ output and treat an `ƒ (Dynamic)` as a regression. Route handlers, `cookies()`,
 `headers()` and middleware all opt routes out of the edge cache, so none are
 used.
 
-Vercel's Hobby tier meters image transformations, and there are fifteen
+Vercel's Hobby tier meters image transformations, and there will be fifteen
 screenshots. Keep them at 1280px wide, keep the `sizes` prop on every
 `next/image` accurate, and keep `priority` on just the first featured card.
 

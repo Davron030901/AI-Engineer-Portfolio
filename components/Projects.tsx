@@ -1,9 +1,9 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { ui } from "@/content/ui";
-import { featuredProjects, projects } from "@/content/projects";
+import { featuredProjects, otherProjects } from "@/content/projects";
 import { useLocale } from "@/components/providers/LocaleProvider";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeader } from "@/components/SectionHeader";
@@ -13,18 +13,20 @@ import { ProjectFilter, type Filter } from "@/components/ProjectFilter";
 
 export function Projects() {
   const { t } = useLocale();
-  const reduced = useReducedMotion();
   const [filter, setFilter] = useState<Filter>("all");
 
-  const rest = useMemo(() => projects.filter((project) => !project.featured), []);
-
   const visible = useMemo(
-    () => (filter === "all" ? rest : rest.filter((p) => p.category === filter)),
-    [filter, rest],
+    () =>
+      filter === "all" ? otherProjects : otherProjects.filter((p) => p.category === filter),
+    [filter],
   );
 
   return (
-    <section id="projects" className="border-b border-line py-section">
+    <section
+      id="projects"
+      aria-labelledby="projects-heading"
+      className="border-b border-line py-section"
+    >
       <div className="shell">
         <Reveal>
           <SectionHeader
@@ -65,17 +67,17 @@ export function Projects() {
 
           <motion.ul
             aria-label={t(ui.a11y.projectGrid)}
-            layout={!reduced}
+            layout
             className="mt-8 grid list-none gap-6 sm:grid-cols-2 lg:grid-cols-3"
           >
             <AnimatePresence mode="popLayout" initial={false}>
               {visible.map((project) => (
                 <motion.li
                   key={project.slug}
-                  layout={!reduced}
-                  initial={reduced ? false : { opacity: 0, scale: 0.97 }}
-                  animate={reduced ? undefined : { opacity: 1, scale: 1 }}
-                  exit={reduced ? undefined : { opacity: 0, scale: 0.97 }}
+                  layout
+                  initial={{ opacity: 0, scale: 0.97 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.97 }}
                   transition={{ duration: 0.26, ease: [0.22, 1, 0.36, 1] }}
                 >
                   <ProjectCard project={project} />

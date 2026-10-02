@@ -1,27 +1,31 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import type { ReactNode } from "react";
 
 /**
- * On-scroll reveal. Transform and opacity only, so it never triggers layout,
- * and it collapses to a plain render when the visitor asks for reduced motion.
+ * On-scroll reveal. Transform and opacity only, so it never triggers layout.
+ * Reduced motion is handled globally by MotionProvider, which drops the
+ * movement and keeps only the fade.
+ *
+ * `as="li"` lets it be the list item itself — wrapping an `<li>` in a `<div>`
+ * would be invalid inside `<ol>`/`<ul>` and breaks `:last-child` styling.
  */
 export function Reveal({
   children,
   delay = 0,
   className,
+  as = "div",
 }: {
   children: ReactNode;
   delay?: number;
   className?: string;
+  as?: "div" | "li";
 }) {
-  const reduced = useReducedMotion();
-
-  if (reduced) return <div className={className}>{children}</div>;
+  const Motion = as === "li" ? motion.li : motion.div;
 
   return (
-    <motion.div
+    <Motion
       className={className}
       initial={{ opacity: 0, y: 14 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -29,6 +33,6 @@ export function Reveal({
       transition={{ duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] }}
     >
       {children}
-    </motion.div>
+    </Motion>
   );
 }

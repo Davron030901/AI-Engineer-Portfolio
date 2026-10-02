@@ -10,6 +10,7 @@ import { siteUrl } from "@/lib/site-url";
 import { DEFAULT_LOCALE } from "@/lib/types";
 import { LocaleProvider } from "@/components/providers/LocaleProvider";
 import { ThemeProvider, themeScript } from "@/components/providers/ThemeProvider";
+import { MotionProvider } from "@/components/providers/MotionProvider";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 
@@ -91,9 +92,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <ThemeProvider>
           <LocaleProvider>
-            <Navbar />
-            <main id="main">{children}</main>
-            <Footer />
+            <MotionProvider>
+              <Navbar />
+              <main id="main">{children}</main>
+              <Footer />
+            </MotionProvider>
           </LocaleProvider>
         </ThemeProvider>
         <Analytics />

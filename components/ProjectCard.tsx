@@ -5,6 +5,7 @@ import { ui } from "@/content/ui";
 import pending from "@/content/pending-screenshots.json";
 import { useLocale } from "@/components/providers/LocaleProvider";
 import { ExternalIcon, GitHubIcon } from "@/components/Icons";
+import { ProjectCover } from "@/components/ProjectCover";
 import type { Project } from "@/lib/types";
 
 const pendingSlugs = new Set<string>(pending as string[]);
@@ -24,25 +25,17 @@ export function ProjectShot({
 
   return (
     <div className="relative aspect-[16/10] w-full overflow-hidden rounded-t-card bg-raised">
-      <Image
-        src={project.image}
-        alt={
-          isPending
-            ? `${t(ui.a11y.pendingScreenshot)} ${title}`
-            : `${t(ui.a11y.screenshotOf)} ${title}`
-        }
-        fill
-        sizes={sizes}
-        priority={priority}
-        className="object-cover object-top"
-      />
-      {isPending && (
-        <span
-          className="absolute right-2 top-2 rounded border border-line bg-canvas/90 px-2 py-1
-                     font-mono text-micro uppercase tracking-wider text-ink-subtle"
-        >
-          placeholder
-        </span>
+      {isPending ? (
+        <ProjectCover project={project} label={`${t(ui.a11y.coverOf)} ${title}`} />
+      ) : (
+        <Image
+          src={project.image}
+          alt={`${t(ui.a11y.screenshotOf)} ${title}`}
+          fill
+          sizes={sizes}
+          priority={priority}
+          className="object-cover object-top"
+        />
       )}
     </div>
   );

@@ -25,14 +25,9 @@ export function generateMetadata({ params }: Params): Metadata {
     title,
     description,
     alternates: { canonical: path },
-    openGraph: {
-      type: "article",
-      url: path,
-      title,
-      description,
-      images: [{ url: project.image, alt: title }],
-    },
-    twitter: { card: "summary_large_image", title, description, images: [project.image] },
+    // The image comes from opengraph-image.tsx beside this file.
+    openGraph: { type: "article", url: path, title, description },
+    twitter: { card: "summary_large_image", title, description },
   };
 }
 

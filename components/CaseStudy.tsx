@@ -37,7 +37,7 @@ export function CaseStudy({ project }: { project: Project }) {
           {highlight && (
             <MetricRule
               className="mt-8"
-              value={highlight.value}
+              value={t(highlight.value)}
               label={t(highlight.label)}
               position={70}
             />

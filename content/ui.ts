@@ -26,10 +26,7 @@ export const ui = {
     projectGrid: { en: "Project list", uz: "Loyihalar ro'yxati" },
     categoryFilter: { en: "Filter projects by category", uz: "Loyihalarni toifa bo'yicha filtrlash" },
     screenshotOf: { en: "Screenshot of", uz: "Skrinshot:" },
-    pendingScreenshot: {
-      en: "Screenshot pending for",
-      uz: "Skrinshot hali tayyorlanmagan:",
-    },
+    coverOf: { en: "Cover illustration for", uz: "Muqova rasmi:" },
   },
 
   nav: {
@@ -48,6 +45,7 @@ export const ui = {
     },
     ctaProjects: { en: "See the projects", uz: "Loyihalarni ko'rish" },
     ctaCv: { en: "Download CV", uz: "CV yuklab olish" },
+    ruleUnit: { en: "systems", uz: "ta tizim" },
     ruleLabel: { en: "measured, not demoed", uz: "namoyish emas, o'lchangan" },
   },
 

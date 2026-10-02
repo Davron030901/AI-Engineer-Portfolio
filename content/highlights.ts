@@ -38,7 +38,7 @@ function numbersIn(text: string): string[] {
   return text.match(/\d+(?:[.,]\d+)?/g) ?? [];
 }
 
-export type Highlight = { value: string; label: Localized };
+export type Highlight = { value: Localized; label: Localized };
 
 function validate(): Record<string, Highlight> {
   for (const [slug, highlight] of Object.entries(raw)) {
@@ -64,7 +64,7 @@ function validate(): Record<string, Highlight> {
     );
 
     const claimed = [
-      ...numbersIn(highlight.value),
+      ...LOCALES.flatMap((locale) => numbersIn(highlight.value[locale])),
       ...LOCALES.flatMap((locale) => numbersIn(highlight.label[locale])),
     ];
 
