@@ -114,9 +114,11 @@ Adding a project: append to `content/projects.json`, drop a screenshot in
 
 ### Categories
 
-Filter chips are derived from the data at build time, so a category with no
-projects never renders a chip. `Cloud & Data` is currently empty and therefore
-hidden. `CV` is labelled **Computer Vision** in the interface, never abbreviated,
+Filter chips are derived from the data at build time and cover only the grid
+below the featured cards, so their counts always match the cards shown. A
+category with no non-featured project never renders a chip: `Cloud & Data` is
+empty, and `Full-Stack AI`'s only project (KidBookAI) is featured, so both are
+currently hidden. `CV` is labelled **Computer Vision** in the interface, never abbreviated,
 because "CV" collides with the CV download button.
 
 ---

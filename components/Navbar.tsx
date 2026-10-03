@@ -39,18 +39,32 @@ function useActiveSection(enabled: boolean): string | null {
     if (targets.length === 0) return;
 
     const visible = new Map<string, boolean>();
+    const update = () => {
+      // The last section is often too short to ever reach the band on a tall
+      // screen, so the bottom of the page always counts as being in it.
+      const atBottom =
+        window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+      // Otherwise: the first section, in page order, that crosses the band.
+      const current = atBottom
+        ? targets[targets.length - 1]
+        : targets.find((el) => visible.get(el.id));
+      setActive(current ? current.id : null);
+    };
+
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) visible.set(entry.target.id, entry.isIntersecting);
-        // First section, in page order, that crosses the band below the navbar.
-        const current = targets.find((el) => visible.get(el.id));
-        setActive(current ? current.id : null);
+        update();
       },
       // A thin band a little below the sticky header decides which section is "current".
       { rootMargin: "-30% 0px -65% 0px" },
     );
     targets.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
+    window.addEventListener("scroll", update, { passive: true });
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", update);
+    };
   }, [enabled]);
 
   return active;

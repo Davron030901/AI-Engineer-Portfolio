@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/og";
+import { notFound } from "next/navigation";
 import { featuredProjects, getProject } from "@/content/projects";
 import { highlights } from "@/content/highlights";
 import { person } from "@/content/site";
@@ -10,12 +11,30 @@ import { DEFAULT_LOCALE } from "@/lib/types";
  * as the page, so a shared link previews the project rather than a screenshot
  * that may not exist yet. Colours are the dark palette from globals.css.
  */
-export const alt = "Case study";
-export const size = { width: 1200, height: 630 };
-export const contentType = "image/png";
+const size = { width: 1200, height: 630 };
 
 export function generateStaticParams() {
   return featuredProjects.map((project) => ({ slug: project.slug }));
+}
+
+/**
+ * Per-project metadata, so each shared link's image alt names its project
+ * rather than every card reading the same generic label.
+ */
+export function generateImageMetadata({ params }: { params: { slug: string } }) {
+  const project = getFeatured(params.slug);
+  const alt = `${ui.caseStudy.eyebrow[DEFAULT_LOCALE]}: ${project.title[DEFAULT_LOCALE]}`;
+  return [{ id: "card", alt, size, contentType: "image/png" }];
+}
+
+/**
+ * Only featured projects have a case study. Unknown slugs 404 here rather than
+ * via `dynamicParams = false`, which would also reject the generated image id.
+ */
+function getFeatured(slug: string) {
+  const project = getProject(slug);
+  if (!project || !project.featured) notFound();
+  return project;
 }
 
 const colors = {
@@ -28,11 +47,11 @@ const colors = {
 };
 
 export default function Image({ params }: { params: { slug: string } }) {
-  const project = getProject(params.slug);
+  const project = getFeatured(params.slug);
   const locale = DEFAULT_LOCALE;
-  const title = project ? project.title[locale] : person.name;
-  const category = project ? ui.categories[project.category][locale] : "";
-  const highlight = project ? highlights[project.slug] : undefined;
+  const title = project.title[locale];
+  const category = ui.categories[project.category][locale];
+  const highlight = highlights[project.slug];
 
   return new ImageResponse(
     (
