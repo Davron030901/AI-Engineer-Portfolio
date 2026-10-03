@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ui } from "@/content/ui";
 import { person } from "@/content/site";
@@ -8,17 +9,71 @@ import { useLocale } from "@/components/providers/LocaleProvider";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { CloseIcon, MenuIcon } from "@/components/Icons";
+import { cn } from "@/lib/cn";
 
 const SECTIONS = [
   { href: "/#about", label: ui.nav.about },
   { href: "/#projects", label: ui.nav.projects },
   { href: "/#skills", label: ui.nav.skills },
+  { href: "/#experience", label: ui.nav.experience },
   { href: "/#contact", label: ui.nav.contact },
 ] as const;
+
+const sectionId = (href: string) => href.slice(href.indexOf("#") + 1);
+
+/**
+ * The section currently under the navbar, so the matching link can say where
+ * the reader is. Only meaningful on the homepage, where the sections live.
+ */
+function useActiveSection(enabled: boolean): string | null {
+  const [active, setActive] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!enabled) {
+      setActive(null);
+      return;
+    }
+    const targets = SECTIONS.map((item) => document.getElementById(sectionId(item.href))).filter(
+      (el): el is HTMLElement => el !== null,
+    );
+    if (targets.length === 0) return;
+
+    const visible = new Map<string, boolean>();
+    const update = () => {
+      // The last section is often too short to ever reach the band on a tall
+      // screen, so the bottom of the page always counts as being in it.
+      const atBottom =
+        window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+      // Otherwise: the first section, in page order, that crosses the band.
+      const current = atBottom
+        ? targets[targets.length - 1]
+        : targets.find((el) => visible.get(el.id));
+      setActive(current ? current.id : null);
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) visible.set(entry.target.id, entry.isIntersecting);
+        update();
+      },
+      // A thin band a little below the sticky header decides which section is "current".
+      { rootMargin: "-30% 0px -65% 0px" },
+    );
+    targets.forEach((el) => observer.observe(el));
+    window.addEventListener("scroll", update, { passive: true });
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", update);
+    };
+  }, [enabled]);
+
+  return active;
+}
 
 export function Navbar() {
   const { t } = useLocale();
   const [open, setOpen] = useState(false);
+  const active = useActiveSection(usePathname() === "/");
 
   // A menu that survives an orientation change or a resize into desktop layout
   // would leave an invisible overlay trapping focus.
@@ -61,15 +116,22 @@ export function Navbar() {
           aria-label={t(ui.a11y.primaryNav)}
           className="hidden items-center gap-7 md:flex"
         >
-          {SECTIONS.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="text-small text-ink-muted transition-colors hover:text-ink"
-            >
-              {t(item.label)}
-            </Link>
-          ))}
+          {SECTIONS.map((item) => {
+            const current = active === sectionId(item.href);
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                aria-current={current ? "location" : undefined}
+                className={cn(
+                  "text-small transition-colors hover:text-ink",
+                  current ? "text-ink" : "text-ink-muted",
+                )}
+              >
+                {t(item.label)}
+              </Link>
+            );
+          })}
         </nav>
 
         <div className="flex items-center gap-2">
@@ -101,7 +163,11 @@ export function Navbar() {
                 <Link
                   href={item.href}
                   onClick={() => setOpen(false)}
-                  className="block py-3 text-body text-ink-muted transition-colors hover:text-ink"
+                  aria-current={active === sectionId(item.href) ? "location" : undefined}
+                  className={cn(
+                    "block py-3 text-body transition-colors hover:text-ink",
+                    active === sectionId(item.href) ? "text-ink" : "text-ink-muted",
+                  )}
                 >
                   {t(item.label)}
                 </Link>

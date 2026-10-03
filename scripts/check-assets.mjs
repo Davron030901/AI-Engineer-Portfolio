@@ -6,7 +6,7 @@
  * public/, the CV file is missing, or the Open Graph image is missing. A broken
  * card should never reach production — the deployment fails instead.
  *
- * Soft failures (ASSETS_STRICT=1): placeholder screenshots and unfinished
+ * Soft failures (ASSETS_STRICT=1): projects still showing a drawn cover, and unfinished
  * content marked `@todo` in content/. Turn this on in Vercel once the site is
  * genuinely finished, and it will stay finished.
  */
@@ -59,9 +59,9 @@ if (existsSync(join(root, pendingPath))) {
   }
   if (pending.length > 0) {
     warnings.push(
-      `${pending.length} placeholder screenshot(s): ${pending.join(", ")}\n` +
-        `    Capture the live demo at 1280x800, replace public/projects/<slug>.png,\n` +
-        `    then remove the slug from ${pendingPath}.`,
+      `${pending.length} project(s) show a drawn cover instead of a screenshot: ${pending.join(", ")}\n` +
+        `    Capture the live demo at 1280x800, save it over public/projects/<slug>.png,\n` +
+        `    then remove the slug from ${pendingPath} — the card switches to the image.`,
     );
   }
 }

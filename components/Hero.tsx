@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { ui } from "@/content/ui";
 import { cvPath, person } from "@/content/site";
 import { projects } from "@/content/projects";
@@ -11,7 +11,6 @@ import { ArrowRightIcon, DownloadIcon } from "@/components/Icons";
 
 export function Hero() {
   const { t } = useLocale();
-  const reduced = useReducedMotion();
 
   const lines = [
     {
@@ -28,7 +27,7 @@ export function Hero() {
     {
       key: "name",
       node: (
-        <h1 className="mt-5 text-display">
+        <h1 id="hero-name" className="mt-5 text-display">
           {person.name}
           <span className="text-accent">.</span>
         </h1>
@@ -50,8 +49,8 @@ export function Hero() {
         {lines.map((line, index) => (
           <motion.div
             key={line.key}
-            initial={reduced ? false : { opacity: 0, y: 18 }}
-            animate={reduced ? undefined : { opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, delay: index * 0.09, ease: [0.22, 1, 0.36, 1] }}
           >
             {line.node}
@@ -80,7 +79,7 @@ export function Hero() {
 
         <MetricRule
           className="mt-14 max-w-md"
-          value={`${projects.length} systems`}
+          value={`${projects.length} ${t(ui.hero.ruleUnit)}`}
           label={t(ui.hero.ruleLabel)}
           position={78}
         />

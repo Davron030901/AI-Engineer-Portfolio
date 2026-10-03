@@ -1,7 +1,7 @@
 "use client";
 
 import { ui } from "@/content/ui";
-import { activeCategories, countByCategory, projects } from "@/content/projects";
+import { activeCategories, countByCategory, otherProjects } from "@/content/projects";
 import { useLocale } from "@/components/providers/LocaleProvider";
 import { cn } from "@/lib/cn";
 import type { Category } from "@/lib/types";
@@ -18,7 +18,7 @@ export function ProjectFilter({
   const { t } = useLocale();
 
   const chips: Array<{ key: Filter; label: string; count: number }> = [
-    { key: "all", label: t(ui.projects.filterAll), count: projects.length },
+    { key: "all", label: t(ui.projects.filterAll), count: otherProjects.length },
     // Only categories that actually contain a project, derived from the data —
     // a chip can never open onto an empty grid.
     ...activeCategories.map((category) => ({

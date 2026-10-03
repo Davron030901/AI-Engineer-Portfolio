@@ -50,7 +50,9 @@ export function Footer() {
     <footer className="border-t border-line py-10">
       <div className="shell flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <p className="text-small text-ink-muted">
+          {/* The page is prerendered at build time; on the first visit after New
+              Year the client's year differs, which is expected, not an error. */}
+          <p className="text-small text-ink-muted" suppressHydrationWarning>
             © {year} {person.name}. {t(ui.footer.rights)}
           </p>
           <p className="mt-1 font-mono text-micro text-ink-subtle">

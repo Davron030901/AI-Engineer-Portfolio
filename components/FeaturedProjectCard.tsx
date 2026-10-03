@@ -43,7 +43,7 @@ export function FeaturedProjectCard({
 
         {highlight && (
           <MetricRule
-            value={highlight.value}
+            value={t(highlight.value)}
             label={t(highlight.label)}
             position={70}
           />

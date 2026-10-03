@@ -11,7 +11,11 @@ export function Skills() {
   const { t } = useLocale();
 
   return (
-    <section id="skills" className="border-b border-line py-section">
+    <section
+      id="skills"
+      aria-labelledby="skills-heading"
+      className="border-b border-line py-section"
+    >
       <div className="shell">
         <Reveal>
           <SectionHeader

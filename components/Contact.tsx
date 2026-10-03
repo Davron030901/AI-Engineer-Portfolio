@@ -45,6 +45,7 @@ export function Contact() {
     label: t(ui.contact.github),
     value: links.github.replace("https://", ""),
     icon: <GitHubIcon />,
+    external: true,
   });
   if (links.phone) {
     channels.push({
@@ -77,7 +78,7 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" className="py-section">
+    <section id="contact" aria-labelledby="contact-heading" className="py-section">
       <div className="shell">
         <Reveal>
           <SectionHeader
@@ -90,23 +91,23 @@ export function Contact() {
 
         <ul className="mt-10 grid list-none gap-3 sm:grid-cols-2">
           {channels.map((channel, index) => (
-            <Reveal key={channel.key} delay={index * 0.05}>
-              <li>
-                <a
-                  href={channel.href}
-                  target={channel.external ? "_blank" : undefined}
-                  rel={channel.external ? "noopener noreferrer" : undefined}
-                  className="card flex items-center gap-4 p-4 hover:border-line-strong"
-                >
-                  <span className="text-ink-subtle">{channel.icon}</span>
-                  <span className="min-w-0">
-                    <span className="block font-mono text-micro uppercase tracking-wider text-ink-subtle">
-                      {channel.label}
-                    </span>
-                    <span className="block truncate text-small text-ink">{channel.value}</span>
+            <Reveal as="li" key={channel.key} delay={index * 0.05}>
+              <a
+                href={channel.href}
+                target={channel.external ? "_blank" : undefined}
+                rel={channel.external ? "noopener noreferrer" : undefined}
+                className="card group flex items-center gap-4 p-4 hover:border-line-strong"
+              >
+                <span className="text-ink-subtle transition-colors group-hover:text-accent">
+                  {channel.icon}
+                </span>
+                <span className="min-w-0">
+                  <span className="block font-mono text-micro uppercase tracking-wider text-ink-subtle">
+                    {channel.label}
                   </span>
-                </a>
-              </li>
+                  <span className="block truncate text-small text-ink">{channel.value}</span>
+                </span>
+              </a>
             </Reveal>
           ))}
         </ul>

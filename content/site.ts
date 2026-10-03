@@ -37,30 +37,30 @@ export const cvPath = "/cv/Davron-Aliqulov-CV.pdf";
  * `value` must already appear in that project's own copy in projects.json —
  * content/highlights.ts enforces it, so no figure can be introduced here.
  */
-export const highlights: Record<string, { value: string; label: Localized }> = {
+export const highlights: Record<string, { value: Localized; label: Localized }> = {
   "loan-terms-assistant": {
-    value: "1 contract",
+    value: { en: "1 contract", uz: "1 ta shartnoma" },
     label: {
       en: "the only thing it will answer about",
       uz: "u javob beradigan yagona narsa",
     },
   },
   "multi-agent-ai-analyst": {
-    value: "4 specialists",
+    value: { en: "4 specialists", uz: "4 ta mutaxassis" },
     label: {
       en: "routed by a supervisor, checked by a critic",
       uz: "supervayzer yo'naltiradi, kritik tekshiradi",
     },
   },
   "kidbook-ai": {
-    value: "8 pages",
+    value: { en: "8 pages", uz: "8 sahifa" },
     label: {
       en: "illustrated, in about two minutes",
       uz: "rasmli, taxminan ikki daqiqada",
     },
   },
   "student-performance-early-warning-system": {
-    value: "0.781 recall",
+    value: { en: "0.781 recall", uz: "0.781 recall" },
     label: {
       en: "at 30% through the course",
       uz: "kursning 30% qismida",
@@ -150,7 +150,7 @@ export const cvOnlySkills: string[] = [
 ];
 
 export type TimelineEntry = {
-  period: string;
+  period: Localized;
   role: Localized;
   org: Localized;
   detail: Localized;
@@ -159,7 +159,7 @@ export type TimelineEntry = {
 
 export const timeline: TimelineEntry[] = [
   {
-    period: "Mar 2026",
+    period: { en: "Mar 2026", uz: "Mart 2026" },
     kind: "work",
     role: { en: "Python Backend Developer", uz: "Python Backend dasturchi" },
     org: { en: "Nextin Web Studio, Tashkent", uz: "Nextin Web Studio, Toshkent" },
@@ -169,7 +169,7 @@ export const timeline: TimelineEntry[] = [
     },
   },
   {
-    period: "Aug — Oct 2025",
+    period: { en: "Aug — Oct 2025", uz: "Avgust — Oktabr 2025" },
     kind: "work",
     role: { en: "Python Backend Developer", uz: "Python Backend dasturchi" },
     org: { en: "ABS Vision, Tashkent", uz: "ABS Vision, Toshkent" },
@@ -179,7 +179,7 @@ export const timeline: TimelineEntry[] = [
     },
   },
   {
-    period: "Jan 2025 — present",
+    period: { en: "Jan 2025 — present", uz: "Yanvar 2025 — hozirgacha" },
     kind: "work",
     role: {
       en: "AI Data Annotator & Quality Assessor",
@@ -192,7 +192,7 @@ export const timeline: TimelineEntry[] = [
     },
   },
   {
-    period: "2023 — 2025",
+    period: { en: "2023 — 2025", uz: "2023 — 2025" },
     kind: "education",
     role: { en: "AI Solutions & Applications", uz: "AI yechimlari va ilovalari" },
     org: { en: "PDP University", uz: "PDP University" },
@@ -202,7 +202,7 @@ export const timeline: TimelineEntry[] = [
     },
   },
   {
-    period: "2019 — 2023",
+    period: { en: "2019 — 2023", uz: "2019 — 2023" },
     kind: "education",
     role: { en: "B.Sc. Physical Engineering", uz: "Fizika muhandisligi bakalavri" },
     org: { en: "Karshi State University", uz: "Qarshi davlat universiteti" },

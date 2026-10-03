@@ -83,13 +83,20 @@ export const projects: Project[] = validate(raw);
 
 export const featuredProjects: Project[] = projects.filter((p) => p.featured);
 
-/** Categories that actually contain at least one project, in display order. */
+/** Everything that is not featured — the filterable grid below the featured cards. */
+export const otherProjects: Project[] = projects.filter((p) => !p.featured);
+
+/**
+ * Categories with at least one project in the filterable grid, in display order.
+ * Counted over the grid only, so a chip never promises more cards than it shows
+ * and never opens onto an empty grid.
+ */
 export const activeCategories: Category[] = CATEGORIES.filter((category) =>
-  projects.some((project) => project.category === category),
+  otherProjects.some((project) => project.category === category),
 );
 
 export function countByCategory(category: Category): number {
-  return projects.filter((project) => project.category === category).length;
+  return otherProjects.filter((project) => project.category === category).length;
 }
 
 export function getProject(slug: string): Project | undefined {
